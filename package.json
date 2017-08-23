@@ -7,7 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack",
     "dev2": "node app",
-    "dev3": "supervisor -w server,app.js  app"
+    "dev3": "supervisor -w server,app.js,webpack.config.js  app",
+    "dev4": "set NODE_ENV=dev & supervisor -w server,app.js,webpack.config.js  app",
+    "dev5": "cross-env NODE_ENV=dev supervisor -w server,app.js,webpack.config.js  app",
+    "build": "webpack --config webpack.production.config"
   },
   "repository": {
     "type": "git",
@@ -20,7 +23,14 @@
   },
   "homepage": "https://github.com/bigmeow/Blog2#readme",
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.0",
+    "clean-webpack-plugin": "^0.1.16",
+    "cross-env": "^5.0.5",
     "css-loader": "^0.28.5",
+    "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
     "reload": "^2.2.1",
     "style-loader": "^0.18.2",
@@ -30,7 +40,11 @@
     "webpack-hot-middleware": "^2.18.2"
   },
   "dependencies": {
+    "babel-runtime": "^6.26.0",
+    "body-parser": "^1.17.2",
     "express": "^4.15.4",
+    "express-session": "^1.15.5",
+    "mongoose": "^4.11.7",
     "swig": "^1.4.2"
   }
 }
