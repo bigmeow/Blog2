@@ -43,7 +43,7 @@ module.exports = {
                 ]
             },
             //先暂时性把这个加载器注释掉
-            /*
+
             {
                 test: /\.js$/,
                 exclude: /(node_modules)/,
@@ -51,11 +51,11 @@ module.exports = {
                     loader: 'babel-loader',
                     options: {
                         presets: ['es2015'],
-                        plugins: ['transform-runtime']
+                        plugins: ['transform-runtime','syntax-dynamic-import']
                     }
                 }
             }
-            */
+
 
 
         ]
