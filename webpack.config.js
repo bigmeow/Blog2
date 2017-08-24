@@ -7,7 +7,8 @@ const srcPath = path.resolve(__dirname, 'src');
 
 module.exports = {
     entry: {
-        'common/main': [srcPath + '/common/main.js', 'webpack-hot-middleware/client?reload=true'] //4  指定重载策略，修改了前端代码js,css后，浏览器会自动刷新
+        'common/main': [srcPath + '/common/main.js', 'webpack-hot-middleware/client?reload=true'], //4  指定重载策略，修改了前端代码js,css后，浏览器会自动刷新
+        'common/admin-lib':['jquery','bootstrap','BOOTSTRAP_CSS'] //public/common/admin-lib.js public/common/admin-lib.css
     },
     output: {
         path: __dirname + '/public',
@@ -16,9 +17,11 @@ module.exports = {
     },
     devtool: 'eval-source-map', //2
     resolve:{
+        modules:[srcPath,'node_modules'],//指定webpack查找文件目录
         //取别名，在自己的js里面直接使用这个别名
         alias: {
             SRC:srcPath ,
+            BOOTSTRAP_CSS:'bootstrap/dist/css/bootstrap.css'
         }
     },
     module: {
@@ -39,17 +42,20 @@ module.exports = {
                     'file-loader'
                 ]
             },
+            //先暂时性把这个加载器注释掉
+            /*
             {
                 test: /\.js$/,
                 exclude: /(node_modules)/,
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['env'],
+                        presets: ['es2015'],
                         plugins: ['transform-runtime']
                     }
                 }
             }
+            */
 
 
         ]
