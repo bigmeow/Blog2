@@ -33,6 +33,8 @@ app.set('view engine', 'html');
 console.log('取出的变量值', process.env.NODE_ENV);
 //是否是开发模式
 const isDev = process.env.NODE_ENV === 'dev';
+//将是否是开发模式存放到locals全局变量中，方便在其他任何地方获取
+app.locals.isDev = isDev ;
 
 if (isDev) {
     //模板不缓存

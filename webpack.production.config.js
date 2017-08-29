@@ -37,6 +37,17 @@ module.exports={
                 use: [
                     'file-loader?limit=8192&name=/fonts/[name].[ext]'
                 ]
+            },
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['env'],
+                        plugins: ['transform-runtime','syntax-dynamic-import']
+                    }
+                }
             }
 
 
@@ -52,24 +63,14 @@ module.exports={
             },
             allChunks: true
         }),
-        {
-            test: /\.js$/,
-            exclude: /(node_modules)/,
-            use: {
-                loader: 'babel-loader',
-                options: {
-                    presets: ['env'],
-                    plugins: ['transform-runtime']
-                }
-            }
-        },
         //把jquery的全局变量提取出来的插件(jQuery not undefined)
 		new webpack.ProvidePlugin({
 			$:'jquery',
 			jQuery:'jquery'
         }),
         //混淆压缩
-        new webpack.optimize.UglifyJsPlugin()
+        new webpack.optimize.UglifyJsPlugin(),//这个插件不支持混淆es6
+        
     ]
 
 

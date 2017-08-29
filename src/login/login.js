@@ -1,5 +1,3 @@
-//require('bootstrap');//这里引入的是js文件
-// require('BOOTSTRAP_CSS');
 require('./login.css');
 let MD5=require('md5.js');
 $('.login form').on('submit',function(e){
