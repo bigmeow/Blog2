@@ -1,3 +1,6 @@
+//初始化编辑器
+var ue = UE.getEditor('body');
+
 //前端校验
 require('jquery-validation');
 //汉化
@@ -50,7 +53,7 @@ $('form').validate({
             method:'post',
             data:{
                 title:$('#title').val(),
-                body:$('#body').val()
+                body:ue.getContent()
             },
             success:function(resp){
                 if(resp.success){

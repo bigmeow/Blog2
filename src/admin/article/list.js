@@ -38,9 +38,6 @@ $('#table').bootstrapTable({
         field: 'title',
         title: '标题'
     }, {
-        field: 'body',
-        title: '内容'
-    }, {
         field: 'time',
         title: '发布时间',
         align: 'center',
