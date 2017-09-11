@@ -22,15 +22,64 @@ router.use((req, res, next) => {
  * 首页
  */
 router.get('/', (req, res, next) => {
-    res.render('index');
+    //获取下前端传给后端的分页数据
+    
+    let page = Number(req.query.page)||1; //第几页
+    let limit = 9 ; //每页固定显示的数据条数
+
+    let offset = (page-1)*limit;
+    /*
+    //查询数据总共有多少条
+    Article.count().then(count => {
+        responseMesg.data.total = count;
+    });
+    */
+
+    Article.find().sort({
+        '_id':-1
+    }).skip(offset).limit(limit).then(articles => {
+        articles = articles.map((item,index)=>{
+            //获取body中的第一张图片地址作为封面
+            let result = item.body.match(/<img [^>]*src=['"]([^'"]+)[^>]*>/);
+            //console.log(result);
+            if(result){
+                item.cover = result[1];
+            }else{
+                //如果匹配不到，给一个默认的封面
+                item.cover = 'http://o0xihan9v.qnssl.com/wp-content/themes/Always/images/thumb.jpg';
+            }
+            
+            //过滤html并且截取前76个字符
+            item.body = item.body.replace(/<[^>]+>/g,'').substring(0,77)+'...';
+
+            console.log(item.cover)
+            return  item;
+        });
+       
+        res.render('index',{
+            //articles:articles
+            articles
+        });
+    })
+   
 });
 
 /**
  * 文章详情
  */
-router.get('/article/detail', (req, res, next) => {
-    
-    res.render('article-details');
+router.get('/article/detail/:id', (req, res, next) => {
+    let id= req.params.id;
+    //成功一定会进入then函数
+    //失败一定会进入catch函数
+    //promise写法
+    Article.findById(id).then(article=>{
+        res.render('article-details',{
+            article
+        });  
+    }).catch(error=>{
+        res.render('404');
+    });
+   
 });
 
 router.get('/index',(req,res,next)=>{
@@ -41,6 +90,14 @@ router.get('/index',(req,res,next)=>{
  * 跳转到登陆界面
  */
 router.get('/login',(req,res,next)=>{
+    /*
+    var request = require('request');
+    request('http://cn.bing.com/', function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+          console.log(body);
+        }
+    })
+    */
     res.render('login');
 });
 
