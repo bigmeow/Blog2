@@ -132,9 +132,9 @@ if (isDev) {
     //因为上面的热加载把编译后的文件放内存了，不放public的文件磁盘上了
     app.use('/public', express.static(__dirname + '/public'));
 
-    //引入路由
-    require('./server/routers/routers')(app);
 
+    //引入路由
+    require('./server/routes/routes')(app);
 
     app.listen(8080, () => {
         console.log('web应用启动成功');
