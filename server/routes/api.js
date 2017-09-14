@@ -56,6 +56,22 @@ router.post('/user/check',(request,response,next)=>{
     })
 });
 
+/**
+ * 注册（注册完后记得注释这里的代码）
+ */
+/*
+router.get('/user/registe',(request,response,next)=>{
+    new User({
+        username:'bigmeow',
+        password:'a6ba8be6627cbd966c40159adf8e0eac',// bigmeow291969452
+        email:'123556@qq.com'
+    }).save().then(user=>{
+        response.json(user);
+    }).catch(error=>{
+        console.log('报错了:',error);
+    });
+});
+*/
 
 
 
