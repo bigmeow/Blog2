@@ -18,7 +18,7 @@ module.exports={
     output:{
         path:__dirname+'/public',
         filename:'[name].js',
-        publicPath:'http://localhost:8080/public/',
+        publicPath:'http://118.31.238.191/public/',
         //发布到线上的时候需要配置下，换成线上的域名地址  https://bigmeow.cn/public/
     },
     resolve:{
